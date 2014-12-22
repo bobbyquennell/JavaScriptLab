@@ -19,9 +19,22 @@ function handleLocationInfo(position){
     var div = document.getElementById("location");
     div.innerHTML = "your location is: latitude " + latitude + " longitude: " + longitude;
 
-    var km = computeDistance(position.coords, myCoords);
+    var km = computeDistance(position.coords, homeCoords);
     var distance = document.getElementById("distance");
-    distance.innerHTML = "You are " + km + " km from the WickedSmart HQ";
+    distance.innerHTML = "You are " + km + " km from " + homeCoords.PlaceName;
+    var myLatlng = new google.maps.LatLng(latitude, longitude);
+    var mapOptions = {
+        center: myLatlng,
+        zoom: 10,
+        mapTypeId: google.maps.MapTypeId.SATELLITE.Hybrid,
+    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"),
+    mapOptions);
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'Hello World!'
+  });
 }
 function errorhandler(error){
     var errorType = {
