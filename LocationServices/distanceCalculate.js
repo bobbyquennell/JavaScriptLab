@@ -11,14 +11,14 @@
         latitude: -37.8473,
         longitude: 144.685
     }
-    myCoords = {
+var myCoords = {
         latitude: -37.8473,
         longitude: 144.685
     }
-    homeCoords = {
+var homeCoords = {
         PlaceName:"Sam's House",
         latitude:-37.8473,
-        longitude:144.685,
+        longitude:144.685
     }
 function computeDistance(startCoords, destCoords){
     var startLatRads = degreesToRadians(startCoords.latitude);
