@@ -5,7 +5,7 @@
 window.onload=init;
 var httpRequest = null;
 var url = "http://192.168.1.14:8080/sales.json";//"http://localhost:8080/sales.json"
-
+var remoteUrl="http://gumball.wickedlysmart.com";
 function Record(name, time,sales){
     this.name = name;
     this.time = time;
@@ -14,14 +14,18 @@ function Record(name, time,sales){
 function init(){
     //create a http request service
     httpRequest = new XMLHttpRequest();
-    httpRequest.onload = httpDataHandler;
+    /*for XMLHttpRequest level2*/
+    //httpRequest.onload = httpDataHandler;
+    /* for XMLHttoRequest level 1*/
+    httpRequest.onreadystatechange = httpDataHandler;
     httpRequest.open("GET",url);
     httpRequest.send();
 }
 // fetch data from server
 function httpDataHandler(){
     //console.log(this.responseText);
-    if(httpRequest.status == 200){
+    //if(httpRequest.status == 200){ //for XMLHttpRequest Level 2
+    if(httpRequest.readyState == 4 && httpRequest.status == 200){ //for XMLHttpRequest Level 1
         var table = document.getElementById("sales");
         var sales = JSON.parse(httpRequest.responseText);
         for(var i=0;i<sales.length;i++){
