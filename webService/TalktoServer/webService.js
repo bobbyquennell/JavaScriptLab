@@ -2,10 +2,10 @@
  * Created by LogicPlatypus on 24/12/2014.
  */
 // intial
-window.onload=init;
+//window.onload=init;
 var httpRequest = null;
 var url = "http://192.168.1.14:8080/sales.json";//"http://localhost:8080/sales.json"
-var remoteUrl="http://gumball.wickedlysmart.com";
+var remoteUrl="http://gumball.wickedlysmart.com/";
 function Record(name, time,sales){
     this.name = name;
     this.time = time;
@@ -39,9 +39,9 @@ function httpDataHandler(){
         //for test: alert("get data from server!");
     }
 }
-function updateSales(responseText){
+function updateSales(sales){
     var table = document.getElementById("sales");
-    var sales = JSON.parse(responseText);
+    //var sales = JSON.parse(responseText);
     for(var i=0;i<sales.length;i++){
         var salesRecord = sales[i].name + " sold " + sales[i].sales + " gumballs";
         var td = document.createElement("td");
@@ -49,6 +49,7 @@ function updateSales(responseText){
         table.appendChild(tr);
         td.innerHTML = salesRecord;
         tr.appendChild(td);
-}}
+    }
+}
 // handle data, display sales data on web page
 
