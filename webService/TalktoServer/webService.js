@@ -26,18 +26,29 @@ function httpDataHandler(){
     //console.log(this.responseText);
     //if(httpRequest.status == 200){ //for XMLHttpRequest Level 2
     if(httpRequest.readyState == 4 && httpRequest.status == 200){ //for XMLHttpRequest Level 1
-        var table = document.getElementById("sales");
-        var sales = JSON.parse(httpRequest.responseText);
-        for(var i=0;i<sales.length;i++){
-            var salesRecord = sales[i].name + " sold " + sales[i].sales + " gumballs";
-            var td = document.createElement("td");
-            var tr = document.createElement("tr");
-            table.appendChild(tr);
-            td.innerHTML = salesRecord;
-            tr.appendChild(td);
-        }
+        //var table = document.getElementById("sales");
+        //var sales = JSON.parse(httpRequest.responseText);
+        //for(var i=0;i<sales.length;i++){
+        //    var salesRecord = sales[i].name + " sold " + sales[i].sales + " gumballs";
+        //    var td = document.createElement("td");
+        //    var tr = document.createElement("tr");
+        //    table.appendChild(tr);
+        //    td.innerHTML = salesRecord;
+        //    tr.appendChild(td);
+        updateSales(httpRequest.responseText);
         //for test: alert("get data from server!");
     }
 }
+function updateSales(responseText){
+    var table = document.getElementById("sales");
+    var sales = JSON.parse(responseText);
+    for(var i=0;i<sales.length;i++){
+        var salesRecord = sales[i].name + " sold " + sales[i].sales + " gumballs";
+        var td = document.createElement("td");
+        var tr = document.createElement("tr");
+        table.appendChild(tr);
+        td.innerHTML = salesRecord;
+        tr.appendChild(td);
+}}
 // handle data, display sales data on web page
 
