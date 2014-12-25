@@ -2,10 +2,12 @@
  * Created by LogicPlatypus on 24/12/2014.
  */
 // intial
-//window.onload=init;
+window.onload=setupTimer;
 var httpRequest = null;
 var url = "http://192.168.1.14:8080/sales.json";//"http://localhost:8080/sales.json"
 var remoteUrl="http://gumball.wickedlysmart.com/";
+var oldReportTimestamp = 0;
+
 function Record(name, time,sales){
     this.name = name;
     this.time = time;
@@ -43,13 +45,36 @@ function updateSales(sales){
     var table = document.getElementById("sales");
     //var sales = JSON.parse(responseText);
     for(var i=0;i<sales.length;i++){
-        var salesRecord = sales[i].name + " sold " + sales[i].sales + " gumballs";
+        var salesRecord = sales[i].name + " sold " + sales[i].sales + " gumballs at " + sales[i].time ;
         var td = document.createElement("td");
         var tr = document.createElement("tr");
         table.appendChild(tr);
         td.innerHTML = salesRecord;
         tr.appendChild(td);
     }
+    if(sales.length>0){
+        oldReportTimestamp = sales[sales.length-1].time;
+    }
 }
+function setupTimer(){
+    setInterval(timerHandler,500);
+}
+function timerHandler(){
+    var script = document.createElement("script");
+    var url = "http://gumball.wickedlysmart.com/?callback=updateSales";
+    var urlwithTimeStamp = url + "&lastreporttime=" + oldReportTimestamp;
+    var urlwithRandom= urlwithTimeStamp + "&random=" + (new Date()).getTime();
+    script.setAttribute("src",urlwithRandom);
+    script.setAttribute("id","jsonp");
+    var head = document.getElementsByTagName("head")[0];
+    var oldElement = document.getElementById("jsonp");
+    if(oldElement == null){
+        head.appendChild(script);
+    }
+    else{
+        head.replaceChild(script,oldElement);
+    }
+}
+
 // handle data, display sales data on web page
 
