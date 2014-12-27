@@ -35,7 +35,9 @@ function drawing(){
         }
         //drawTriangle(canvas,ctx);
         //drawCircle(ctx);
+
     }
+    drawSimpleFace(ctx);
 
 }
 function getRandomInt(min, max) {
@@ -80,4 +82,29 @@ function drawCircle(context){
 }
 function degreesToRadians(degrees){
     return (degrees*Math.PI)/180;
+}
+
+function drawSimpleFace(context){
+
+    context.beginPath();
+    context.arc(300,300,200,0,degreesToRadians(360),true);//draw the head
+    context.stroke();
+
+    context.beginPath();
+    context.arc(200,250,25,0,degreesToRadians(360),true);//draw a left eye
+    context.stroke();
+
+    context.beginPath();
+    context.arc(400,250,25,0,degreesToRadians(360),true);//draw a right eye
+    context.stroke();
+
+    context.beginPath();
+    context.arc(300,350,75,degreesToRadians(20),degreesToRadians(160),false);//draw a mouth
+    context.stroke();
+
+    context.beginPath();
+    context.moveTo(300,300);//draw a nose
+    context.lineTo(300,350);
+    context.stroke();
+
 }
