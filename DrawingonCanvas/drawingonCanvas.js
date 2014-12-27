@@ -39,6 +39,12 @@ function drawing(){
     }
     //drawSimpleFace(ctx);
     drawText(canvas);
+    var twitterBird = new Image();
+    twitterBird.src = "twitterBird.png";
+    twitterBird.onload = function(){
+        ctx.drawImage(twitterBird,20,120,70,70);
+    };
+
 
 }
 function getRandomInt(min, max) {
@@ -135,7 +141,7 @@ function drawText(canvas){
     ctx.textAlign = "right";
     ctx.fillText(text3,canvas.width-20,canvas.height-40);
 
-    ctx.font = "italic 1em times sans-serif";
+    ctx.font = "italic 1.2em times sans-serif";
     ctx.textAlign = "left";
     ctx.fillText(text2,40,100);
 
