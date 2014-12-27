@@ -22,6 +22,10 @@ function drawing(){
     var shape = ShapeObj[index].value;
     var backgroundColor = backgrndColorObj[backgrndColorObj.selectedIndex].value;
     fillbackgroundColor(canvas,backgroundColor);
+    ctx.shadowBlur = 10;
+    ctx.shadowOffsetX = 3;
+    ctx.shadowOffsetY = 3;
+    ctx.shadowColor = "black"
     if(shape == "circles")
     {
         //drawCircles();
@@ -38,6 +42,9 @@ function drawing(){
 
     }
     //drawSimpleFace(ctx);
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
     drawText(canvas);
     var twitterBird = new Image();
     twitterBird.src = "twitterBird.png";
@@ -132,6 +139,10 @@ function drawText(canvas){
     var text2 = tweets[tweets.selectedIndex].value;
     var text1 = "I saw this tweet";
     var text3 = "and all I got was this lousy t-shirt";
+    //ctx.shadowBlur = 10;
+    //ctx.shadowOffsetX = 3;
+    //ctx.shadowOffsetY = 3;
+    //ctx.shadowColor = "black"
     ctx.fillStyle = forgrndColor;
     ctx.font = "bold 1em sans-serif";
     ctx.textAlign = "left";
