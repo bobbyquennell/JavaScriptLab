@@ -5,7 +5,7 @@ div#tv{
     width:650px;
 }
 div#tvConsole{
-    /*position: relative;*/
+    position: relative;
     background: url(images/tv.png) no-repeat top left;
     width:650px;
     height:770px;
@@ -14,11 +14,19 @@ div#tvConsole{
     /* background-position: center top;
     background-repeat: no-repeat;*/
 }
+div#highlight{
+    position:absolute;/*a good example of CSS absolute positioning see hfhtml and css page 536*/
+    top:10px;
+    left:10px;
+    z-index:1;
+}
 div#videoDiv {
 /*margin:0px 100px 200px 200px;*/
     position:relative;/*a good example of CSS relative positioning see hfhtml and css page 536*/
-    width:600px;
-    height:400px;
-    top:-165px;
+    top:70px;
     left:80px;
+}
+video{
+    width:480px;
+    height:360px;
 }
