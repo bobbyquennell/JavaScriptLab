@@ -12,6 +12,7 @@ function drawingInit(){
     }
     var button = document.getElementById("previewButton");
     button.onclick = drawing;
+    canvas.onclick = exportPicture;
 }
 function drawing(){
     var backgrndColorObj = document.getElementById("backgroundColor");
@@ -156,4 +157,7 @@ function drawText(canvas){
     ctx.textAlign = "left";
     ctx.fillText(text2,40,100);
 
+}
+function exportPicture(){
+    window.location=canvas.toDataURL("image/png");
 }
