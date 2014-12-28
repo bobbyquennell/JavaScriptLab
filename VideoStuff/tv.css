@@ -1,0 +1,24 @@
+div#tv{
+
+    /*background-size: 60%;*/
+    margin:auto;
+    width:650px;
+}
+div#tvConsole{
+    /*position: relative;*/
+    background: url(images/tv.png) no-repeat top left;
+    width:650px;
+    height:770px;
+    top:0px;
+    left:0px;
+    /* background-position: center top;
+    background-repeat: no-repeat;*/
+}
+div#videoDiv {
+/*margin:0px 100px 200px 200px;*/
+    position:relative;/*a good example of CSS relative positioning see hfhtml and css page 536*/
+    width:600px;
+    height:400px;
+    top:-165px;
+    left:80px;
+}
