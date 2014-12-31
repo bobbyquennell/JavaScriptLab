@@ -75,13 +75,13 @@ function getFormatExtension() {
 	var video = document.getElementById("video");
 	if (video.canPlayType("video/mp4") != "") {
 		return ".mp4";
-	} 
+	}
 	else if (video.canPlayType("video/ogg") != "") {
 		return ".ogv";
 	}
 	else if (video.canPlayType("video/webm") != "") {
 		return ".webm";
-	} 
+	}
 }
 
 function handleControl(e) {
