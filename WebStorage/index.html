@@ -3,14 +3,25 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>note to self</title>
+    <link rel="stylesheet" href="sticky.css">
+    <script src="sticky.js"></script>
 </head>
 <body>
     <script>
-        localStorage.setItem("sticky_0","remember to stay in your learning zone");
-        localStorage.setItem("sticky_1","just do it!");
-        var value = localStorage.getItem("sticky_1");
-        alert(value);
+        <!--for a simple try of localStorage method -->
+//        localStorage.setItem("sticky_0","remember to stay in your learning zone");
+//        localStorage.setItem("sticky_1","just do it!");
+//        var value = localStorage.getItem("sticky_1");
+//        alert(value);
     </script>
+<form>
+    <!--for stickies input-->
+    <input id="text" type="text" placeholder="example" required>
+    <input id="sticky" type="button" value="Add Sticky Note to Self">
+</form>
+    <div id="stickies">
+        <!--your notes will go here-->
+    </div>
 
 </body>
 </html>
