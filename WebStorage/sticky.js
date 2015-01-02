@@ -44,7 +44,10 @@ function drawSticky(stickyId,text,posX,posY,maxCharPerLine){
          ctx.fillText(text, 20, 100);
      }*/
     var li = document.createElement("li");
-    li.innerHTML = text;
+    var span = document.createElement("span");
+    span.setAttribute("class", "sticky");
+    span.innerHTML = text;
+    li.appendChild(span);
 
     var ul = document.getElementById("stickies");
     ul.appendChild(li);
