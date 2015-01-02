@@ -22,19 +22,19 @@ function stickIt() {
     //create a canvas to display the sticky
 }
 function drawSticky(stickyId,text,posX,posY,maxCharPerLine){
-    var canvas = document.createElement("canvas");
+    /*var canvas = document.createElement("canvas");
     canvas.setAttribute("width","210px");
     canvas.setAttribute("height","250px");
     canvas.setAttribute("id",stickyId);
     var ctx = canvas.getContext("2d");
     ctx.font = "2em Lucida Grande serif";
-    ctx.textAlign = "left";
+    ctx.textAlign = "left";*/
     //ctx.fillText(text,20,50);
     // If you want to try splitIntoLines to
     // handle longer tweets, uncomment this code
     // and replace the context.fillText line above
 
-     if (text.length > maxCharPerLine) {
+   /*  if (text.length > maxCharPerLine) {
      var textLines = splitIntoLines(text, maxCharPerLine);
      for (var i = 0; i < textLines.length; i++) {
          ctx.fillText(textLines[i], 20, 70+(i*25));
@@ -42,23 +42,30 @@ function drawSticky(stickyId,text,posX,posY,maxCharPerLine){
      }
      else {
          ctx.fillText(text, 20, 100);
-     }
+     }*/
+    var li = document.createElement("li");
+    li.innerHTML = text;
 
-    var div = document.getElementById("stickies");
-    div.appendChild(canvas);
+    var ul = document.getElementById("stickies");
+    ul.appendChild(li);
 }
 function loadStickies(){
     //foreach the localStorage to display all stickies
     var index = 0;
     var key = "sticky_" + index;
     for(index = 0; index < localStorage.length; index++){
-        var key = "sticky_" + index;
+        // A better way to get all the key in localStorage iteration is using the .key(i) property
+        // var key = "sticky_" + index;
+        var key = localStorage.key(index);
         //var text = localStorage["key"];
-        var text = localStorage.getItem(key);
-        if(text != null){
-            drawSticky(key,text,20,50,20);
-            stickCount += 1;
+        if(key.substring(0,6)=="sticky"){//note: make sure what you get is what you want!!!!!
+            var text = localStorage.getItem(key);
+            if(text != null){
+                drawSticky(key,text,20,50,20);
+                stickCount += 1;
+            }
         }
+
     }
 
 }
