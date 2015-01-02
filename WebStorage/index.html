@@ -8,13 +8,13 @@
 </head>
 <body>
     <script>
-        var testNum = 1.2;
-        var resltCeil1 = Math.ceil(1.2);
-        var resltCeil2 = Math.ceil(1.5);
-        var resultRound1 = Math.round(1.2);
-        var resultRound2 = Math.round(1.5);
-        alert("Math.ceil(1.2) = " + resltCeil1 +" Math.ceil(1.5) is " + resltCeil2 + "  Math.round(1.2) is "
-        + resultRound1 + " Math.round(1.5) is " + resultRound2);
+//        var testNum = 1.2;
+//        var resltCeil1 = Math.ceil(1.2);
+//        var resltCeil2 = Math.ceil(1.5);
+//        var resultRound1 = Math.round(1.2);
+//        var resultRound2 = Math.round(1.5);
+//        alert("Math.ceil(1.2) = " + resltCeil1 +" Math.ceil(1.5) is " + resltCeil2 + "  Math.round(1.2) is "
+//        + resultRound1 + " Math.round(1.5) is " + resultRound2);
         <!--for a simple try of localStorage method -->
 //        localStorage.setItem("sticky_0","remember to stay in your learning zone");
 //        localStorage.setItem("sticky_1","just do it!");
@@ -23,12 +23,12 @@
     </script>
 <form>
     <!--for stickies input-->
-    <input id="text" type="text" placeholder="example" required>
-    <input id="sticky" type="button" value="Add Sticky Note to Self">
+    <input id="note_text" type="text" placeholder="example" required>
+    <input id="add_button" type="button" value="Add Sticky Note to Self">
 </form>
-    <div id="stickies">
+    <ul id="stickies">
         <!--your notes will go here-->
-    </div>
+    </ul>
 
 </body>
 </html>

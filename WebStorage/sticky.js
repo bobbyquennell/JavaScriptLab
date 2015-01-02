@@ -6,7 +6,7 @@ var stickyKey = "sticky";
 var stickCount = 0;
 var maxCharPerLine = 18;
 function stickiesInit(){
-    var button = document.getElementById("sticky");
+    var button = document.getElementById("add_button");
     button.onclick = stickIt;
     loadStickies();
     //load all the stickies and display it
@@ -15,7 +15,7 @@ function stickIt() {
     //setItem(sticky_0, Text.input);
     var key = stickyKey + "_" + stickCount;
     stickCount += 1;
-    var textObj = document.getElementById("text");
+    var textObj = document.getElementById("note_text");
     var text = textObj.value;
     localStorage.setItem(key, text);
     drawSticky(key, text, 20, 50,maxCharPerLine);
