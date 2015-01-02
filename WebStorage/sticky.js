@@ -12,14 +12,27 @@ function stickiesInit(){
     //load all the stickies and display it
 }
 function stickIt() {
-    //setItem(sticky_0, Text.input);
-    var key = stickyKey + "_" + stickCount;
-    stickCount += 1;
+    ////setItem(sticky_0, Text.input);
+    //var key = stickyKey + "_" + stickCount;
+    //stickCount += 1;
+    //var textObj = document.getElementById("note_text");
+    //var text = textObj.value;
+    //localStorage.setItem(key, text);
+    //drawSticky(key, text, 20, 50,maxCharPerLine);
+    ////create a canvas to display the sticky
+
+   /* a way better method to store the keys and values in localStorage */
+    // 1.store the new key to the stickyKeyArray in localStorage
+    var stickyKeysArray = getStickyKeysArray();
+    var time = new Date();
+    var key = "sticky_" + time.getTime();
+    stickyKeysArray.push(key);
+    localStorage.setItem("stickyKeys", JSON.stringify(stickyKeysArray));
+    // 2. store the new sticky value along with a new key
     var textObj = document.getElementById("note_text");
     var text = textObj.value;
     localStorage.setItem(key, text);
     drawSticky(key, text, 20, 50,maxCharPerLine);
-    //create a canvas to display the sticky
 }
 function drawSticky(stickyId,text,posX,posY,maxCharPerLine){
     /*var canvas = document.createElement("canvas");
@@ -55,11 +68,14 @@ function drawSticky(stickyId,text,posX,posY,maxCharPerLine){
 function loadStickies(){
     //foreach the localStorage to display all stickies
     var index = 0;
-    var key = "sticky_" + index;
+    //var key = "sticky_" + index;
+    var stickyKeysArray = getStickyKeysArray();
+  /*  old version of storing things
     for(index = 0; index < localStorage.length; index++){
         // A better way to get all the key in localStorage iteration is using the .key(i) property
-        // var key = "sticky_" + index;
-        var key = localStorage.key(index);
+        // var key = "sticky_" + index;//way 1
+        var key = localStorage.key(index);//way 2
+
         //var text = localStorage["key"];
         if(key.substring(0,6)=="sticky"){//note: make sure what you get is what you want!!!!!
             var text = localStorage.getItem(key);
@@ -69,6 +85,12 @@ function loadStickies(){
             }
         }
 
+    }*/
+    /* a way better method to store the keys and values in localStorage */
+    for(index=0; index < stickyKeysArray.length; index++){
+        var key = stickyKeysArray[index];
+        var text = localStorage[key];
+        drawSticky(key, text, 20, 50, 20);
     }
 
 }
@@ -97,4 +119,15 @@ function splitIntoLines(str,maxCharPerLine) {
     //    strs[2] = strs[1].substring(0, splitIndex);
     //}
     return strs;
+}
+function getStickyKeysArray(){
+    var stickyKeysArray = localStorage.getItem("stickyKeys");
+    if(!stickyKeysArray){
+        stickyKeysArray = [];
+        localStorage.setItem("stickyKeys", JSON.stringify(stickyKeysArray));
+    }
+    else{
+        stickyKeysArray = JSON.parse(stickyKeysArray);
+    }
+    return stickyKeysArray;
 }
