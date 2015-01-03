@@ -61,9 +61,11 @@ function drawSticky(stickyId,text,posX,posY,maxCharPerLine){
     span.setAttribute("class", "sticky");
     span.innerHTML = text;
     li.appendChild(span);
+    li.setAttribute("id", stickyId);
 
     var ul = document.getElementById("stickies");
     ul.appendChild(li);
+    li.onclick = deleteSticky;
 }
 function loadStickies(){
     //foreach the localStorage to display all stickies
@@ -130,4 +132,26 @@ function getStickyKeysArray(){
         stickyKeysArray = JSON.parse(stickyKeysArray);
     }
     return stickyKeysArray;
+}
+function deleteSticky(e){
+    var key = e.target.id;
+    if(e.target.tagName.toLowerCase() == "span"){
+        key = e.target.parentNode.id;
+    }
+    localStorage.removeItem(key);
+    var stickyKeysArray = getStickyKeysArray();
+    if(stickyKeysArray){
+        for(var i=0; i<stickyKeysArray.length; i++){
+            if(stickyKeysArray[i] == key){
+                stickyKeysArray.splice(i,1);
+            }
+        }
+        localStorage.setItem("stickyKeys", JSON.stringify(stickyKeysArray));
+    }
+    removeStickyFromDom(key);
+}
+function removeStickyFromDom(key){
+    var li = document.getElementById(key);
+    var ul = document.getElementById("stickies");
+    ul.removeChild(li);
 }
