@@ -31,10 +31,18 @@ function stickIt() {
     // 2. store the new sticky value along with a new key
     var textObj = document.getElementById("note_text");
     var text = textObj.value;
-    localStorage.setItem(key, text);
-    drawSticky(key, text, 20, 50,maxCharPerLine);
+
+    var colorSelectObj = document.getElementById("sticky_color");
+    var index = colorSelectObj.selectedIndex;
+    var color = colorSelectObj[index].value;
+    var stickyObj = {
+        "value":text,
+        "color":color
+    }
+    localStorage.setItem(key, JSON.stringify(stickyObj));
+    drawSticky(key, stickyObj, 20, 50,maxCharPerLine);
 }
-function drawSticky(stickyId,text,posX,posY,maxCharPerLine){
+function drawSticky(stickyId,stickyObj,posX,posY,maxCharPerLine){
     /*var canvas = document.createElement("canvas");
     canvas.setAttribute("width","210px");
     canvas.setAttribute("height","250px");
@@ -59,7 +67,8 @@ function drawSticky(stickyId,text,posX,posY,maxCharPerLine){
     var li = document.createElement("li");
     var span = document.createElement("span");
     span.setAttribute("class", "sticky");
-    span.innerHTML = text;
+    span.innerHTML = stickyObj.value;
+    li.style.backgroundColor = stickyObj.color;
     li.appendChild(span);
     li.setAttribute("id", stickyId);
 
@@ -91,8 +100,9 @@ function loadStickies(){
     /* a way better method to store the keys and values in localStorage */
     for(index=0; index < stickyKeysArray.length; index++){
         var key = stickyKeysArray[index];
-        var text = localStorage[key];
-        drawSticky(key, text, 20, 50, 20);
+        var stickyObj = localStorage[key];
+        var value  = JSON.parse(localStorage[key]);
+        drawSticky(key, value, 20, 50, 20);
     }
 
 }
@@ -152,6 +162,7 @@ function deleteSticky(e){
 }
 function removeStickyFromDom(key){
     var li = document.getElementById(key);
-    var ul = document.getElementById("stickies");
-    ul.removeChild(li);
+    //var ul = document.getElementById("stickies");
+    //ul.removeChild(li);
+    li.parentNode.removeChild(li);
 }

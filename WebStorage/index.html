@@ -23,7 +23,15 @@
     </script>
 <form>
     <!--for stickies input-->
-    <input id="note_text" type="text" placeholder="example" required>
+    <label for="sticky_color">Color:</label>
+    <select name="sticky_color" id="sticky_color">
+        <option value="LightGoldenRodYellow">Yellow</option>
+        <option value="LightBlue">Blue</option>
+        <option value="LightPink">Pink</option>
+        <option value="PaleGreen">Green</option>
+    </select>
+    <label for="note_text">Text:</label>
+    <input id="note_text" name="text" type="text" placeholder="example" required>
     <input id="add_button" type="button" value="Add Sticky Note to Self">
 </form>
     <ul id="stickies">
