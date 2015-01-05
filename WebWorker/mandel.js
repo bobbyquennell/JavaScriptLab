@@ -1,7 +1,7 @@
 /**
  * Created by LogicPlatypus on 5/01/2015.
  */
-var numberOfWorkers = 4;
+var numberOfWorkers = 8;
 var workers = [];
 var nextRow = 0;
 var generation = 0;
