@@ -50,8 +50,8 @@ function drawRow(workerResults){
             pixelData[green] = color[1];
             pixelData[blue] = color[2];
         }
-        ctx.putImageData(this.rowData, 0, workerResults.row);
     }
+    ctx.putImageData(this.rowData, 0, workerResults.row);
 }
 
 function setupGraphics(){
