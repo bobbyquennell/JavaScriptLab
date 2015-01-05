@@ -1,7 +1,7 @@
 /**
  * Created by LogicPlatypus on 5/01/2015.
  */
-var numberOfWorkers = 8;
+var numberOfWorkers = 4;
 var workers = [];
 var nextRow = 0;
 var generation = 0;
@@ -9,6 +9,9 @@ var generation = 0;
 window.onload = init;
 function init(){
     setupGraphics();
+    window.onresize = function(){
+        resizeToWindow();
+    }
     canvas.onclick = function(event){
             handleClick(event.clientX, event.clientY);
         };
@@ -40,8 +43,9 @@ function startWorkers(){
 }
 
 function processWork(worker, workerResults){
-
-    drawRow(workerResults);
+    if(workerResults.generation == generation) {
+        drawRow(workerResults);
+    }
     reassignWorkers(worker);
 }
 
@@ -78,6 +82,18 @@ function handleClick(x, y){
     r_max = click_r + width/zoom;
     i_max = click_i - height/zoom;
     i_min = click_i + height/zoom;
+
+    startWorkers();
+}
+
+function resizeToWindow(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    var width = ((i_max - i_min) * canvas.width / canvas.height);
+    var r_mid = (r_max + r_min) / 2;
+    r_min = r_mid - width/2;
+    r_max = r_mid + width/2;
+    rowData = ctx.createImageData(canvas.width, 1);
 
     startWorkers();
 }
