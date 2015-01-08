@@ -5,12 +5,14 @@ window.onload = stickiesInit;
 var stickyKey = "sticky";
 var stickCount = 0;
 var maxCharPerLine = 18;
-function stickiesInit(){
+
+function stickiesInit() {
     var button = document.getElementById("add_button");
     button.onclick = stickIt;
     loadStickies();
     //load all the stickies and display it
 }
+
 function stickIt() {
     ////setItem(sticky_0, Text.input);
     //var key = stickyKey + "_" + stickCount;
@@ -21,7 +23,7 @@ function stickIt() {
     //drawSticky(key, text, 20, 50,maxCharPerLine);
     ////create a canvas to display the sticky
 
-   /* a way better method to store the keys and values in localStorage */
+    /* a way better method to store the keys and values in localStorage */
     // 1.store the new key to the stickyKeyArray in localStorage
     var stickyKeysArray = getStickyKeysArray();
     var time = new Date();
@@ -36,13 +38,14 @@ function stickIt() {
     var index = colorSelectObj.selectedIndex;
     var color = colorSelectObj[index].value;
     var stickyObj = {
-        "value":text,
-        "color":color
-    }
+        "value": text,
+        "color": color
+    };
     localStorage.setItem(key, JSON.stringify(stickyObj));
-    drawSticky(key, stickyObj, 20, 50,maxCharPerLine);
+    drawSticky(key, stickyObj, 20, 50, maxCharPerLine);
 }
-function drawSticky(stickyId,stickyObj,posX,posY,maxCharPerLine){
+
+function drawSticky(stickyId, stickyObj, posX, posY, maxCharPerLine) {
     /*var canvas = document.createElement("canvas");
     canvas.setAttribute("width","210px");
     canvas.setAttribute("height","250px");
@@ -55,15 +58,15 @@ function drawSticky(stickyId,stickyObj,posX,posY,maxCharPerLine){
     // handle longer tweets, uncomment this code
     // and replace the context.fillText line above
 
-   /*  if (text.length > maxCharPerLine) {
-     var textLines = splitIntoLines(text, maxCharPerLine);
-     for (var i = 0; i < textLines.length; i++) {
-         ctx.fillText(textLines[i], 20, 70+(i*25));
-     }
-     }
-     else {
-         ctx.fillText(text, 20, 100);
-     }*/
+    /*  if (text.length > maxCharPerLine) {
+      var textLines = splitIntoLines(text, maxCharPerLine);
+      for (var i = 0; i < textLines.length; i++) {
+          ctx.fillText(textLines[i], 20, 70+(i*25));
+      }
+      }
+      else {
+          ctx.fillText(text, 20, 100);
+      }*/
     var li = document.createElement("li");
     var span = document.createElement("span");
     span.setAttribute("class", "sticky");
@@ -76,51 +79,51 @@ function drawSticky(stickyId,stickyObj,posX,posY,maxCharPerLine){
     ul.appendChild(li);
     li.onclick = deleteSticky;
 }
-function loadStickies(){
-    //foreach the localStorage to display all stickies
-    var index = 0;
-    //var key = "sticky_" + index;
-    var stickyKeysArray = getStickyKeysArray();
-  /*  old version of storing things
-    for(index = 0; index < localStorage.length; index++){
-        // A better way to get all the key in localStorage iteration is using the .key(i) property
-        // var key = "sticky_" + index;//way 1
-        var key = localStorage.key(index);//way 2
 
-        //var text = localStorage["key"];
-        if(key.substring(0,6)=="sticky"){//note: make sure what you get is what you want!!!!!
-            var text = localStorage.getItem(key);
-            if(text != null){
-                drawSticky(key,text,20,50,20);
-                stickCount += 1;
-            }
+function loadStickies() {
+        //foreach the localStorage to display all stickies
+        var index = 0;
+        //var key = "sticky_" + index;
+        var stickyKeysArray = getStickyKeysArray();
+        /*  old version of storing things
+          for(index = 0; index < localStorage.length; index++){
+              // A better way to get all the key in localStorage iteration is using the .key(i) property
+              // var key = "sticky_" + index;//way 1
+              var key = localStorage.key(index);//way 2
+
+              //var text = localStorage["key"];
+              if(key.substring(0,6)=="sticky"){//note: make sure what you get is what you want!!!!!
+                  var text = localStorage.getItem(key);
+                  if(text != null){
+                      drawSticky(key,text,20,50,20);
+                      stickCount += 1;
+                  }
+              }
+
+          }*/
+        /* a way better method to store the keys and values in localStorage */
+        for (index = 0; index < stickyKeysArray.length; index++) {
+            var key = stickyKeysArray[index];
+            var stickyObj = localStorage[key];
+            var value = JSON.parse(localStorage[key]);
+            drawSticky(key, value, 20, 50, 20);
         }
 
-    }*/
-    /* a way better method to store the keys and values in localStorage */
-    for(index=0; index < stickyKeysArray.length; index++){
-        var key = stickyKeysArray[index];
-        var stickyObj = localStorage[key];
-        var value  = JSON.parse(localStorage[key]);
-        drawSticky(key, value, 20, 50, 20);
     }
-
-}
-// Splits one long string into multiple lines of
-// no more than 60 characters each. Returns an
-// array of the lines.
-function splitIntoLines(str,maxCharPerLine) {
-    var strs = new Array();
+    // Splits one long string into multiple lines of
+    // no more than 60 characters each. Returns an
+    // array of the lines.
+function splitIntoLines(str, maxCharPerLine) {
+    var strs = [];
     var splitStartIndex = 0;
     var splitEndIndex = 0;
     var numberOfLines = Math.ceil(str.length / maxCharPerLine);
-    for(var lineIndex = 0; lineIndex < numberOfLines; lineIndex++){
-        splitEndIndex = str.indexOf(' ',(splitStartIndex + maxCharPerLine));
-        if(splitEndIndex >= maxCharPerLine){
+    for (var lineIndex = 0; lineIndex < numberOfLines; lineIndex++) {
+        splitEndIndex = str.indexOf(' ', (splitStartIndex + maxCharPerLine));
+        if (splitEndIndex >= maxCharPerLine) {
             strs[lineIndex] = str.substring(splitStartIndex, splitEndIndex);
-        }
-        else{
-            strs[lineIndex] = str.substring(splitStartIndex);//the last line
+        } else {
+            strs[lineIndex] = str.substring(splitStartIndex); //the last line
         }
         splitStartIndex = splitEndIndex;
     }
@@ -132,35 +135,37 @@ function splitIntoLines(str,maxCharPerLine) {
     //}
     return strs;
 }
-function getStickyKeysArray(){
+
+function getStickyKeysArray() {
     var stickyKeysArray = localStorage.getItem("stickyKeys");
-    if(!stickyKeysArray){
+    if (!stickyKeysArray) {
         stickyKeysArray = [];
         localStorage.setItem("stickyKeys", JSON.stringify(stickyKeysArray));
-    }
-    else{
+    } else {
         stickyKeysArray = JSON.parse(stickyKeysArray);
     }
     return stickyKeysArray;
 }
-function deleteSticky(e){
+
+function deleteSticky(e) {
     var key = e.target.id;
-    if(e.target.tagName.toLowerCase() == "span"){
+    if (e.target.tagName.toLowerCase() == "span") {
         key = e.target.parentNode.id;
     }
     localStorage.removeItem(key);
     var stickyKeysArray = getStickyKeysArray();
-    if(stickyKeysArray){
-        for(var i=0; i<stickyKeysArray.length; i++){
-            if(stickyKeysArray[i] == key){
-                stickyKeysArray.splice(i,1);
+    if (stickyKeysArray) {
+        for (var i = 0; i < stickyKeysArray.length; i++) {
+            if (stickyKeysArray[i] == key) {
+                stickyKeysArray.splice(i, 1);
             }
         }
         localStorage.setItem("stickyKeys", JSON.stringify(stickyKeysArray));
     }
     removeStickyFromDom(key);
 }
-function removeStickyFromDom(key){
+
+function removeStickyFromDom(key) {
     var li = document.getElementById(key);
     //var ul = document.getElementById("stickies");
     //ul.removeChild(li);
